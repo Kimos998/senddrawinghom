@@ -596,24 +596,44 @@ Product illustrations and packaging design
 
   <form action="#" class="form" data-form>
 
-    <div class="input-wrapper" style="width: 80%; float: left; display: inline-block;">
-      <input type="text" name="fullname" class="form-input" placeholder="Full name" required data-form-input>
+    <div class="input-wrapper">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" class="form-input" placeholder="Full name" required data-form-input>
     </div>
 
-    <div class="input-wrapper" style="width: 80%; float: right; display: inline-block;">
-      <input type="email" name="email" class="form-input" placeholder="Email address" required data-form-input>
+    <div class="input-wrapper">
+      <label for="email">Email address:</label>
+      <input type="email" id="email" name="email" class="form-input" placeholder="Email address" required data-form-input>
     </div>
 
-    <div class="input-wrapper" style="width: 80%;">
-      <input type="text" name="subject" class="form-input" placeholder="Subject of portrait" required data-form-input>
+    <div class="input-wrapper">
+      <label for="subject">Subject of portrait:</label>
+      <input type="text" id="subject" name="subject" class="form-input" placeholder="Yourself, a loved one, or a group of people" required data-form-input>
     </div>
 
-    <div class="input-wrapper" style="width: 80%;">
+    <div class="input-wrapper">
+      <label for="style">Portrait style:</label>
+      <input type="text" id="style" name="style" class="form-input" placeholder="Realistic, stylized, or caricature" required data-form-input>
+    </div>
+
+    <div class="input-wrapper">
+      <label for="photos">Photo(s) of the subject(s):</label>
       <input type="file" id="photos" name="photos[]" multiple accept="image/*" class="form-input" data-form-input>
     </div>
 
-    <div class="input-wrapper" style="width: 80%;">
-      <textarea id="details" name="details" rows="5" class="form-input" placeholder="Additional details and customization requests" data-form-input></textarea>
+    <div class="input-wrapper">
+      <label for="background">Background description:</label>
+      <input type="text" id="background" name="background" class="form-input" placeholder="Describe your desired background" data-form-input>
+    </div>
+
+    <div class="input-wrapper">
+      <label for="clothing">Clothing and accessories:</label>
+      <input type="text" id="clothing" name="clothing" class="form-input" placeholder="Describe your desired attire and accessories" data-form-input>
+    </div>
+
+    <div class="input-wrapper">
+      <label for="text">Text elements:</label>
+      <input type="text" id="text" name="text" class="form-input" placeholder="Include a name, message, or quote" data-form-input>
     </div>
 
     <button class="form-btn" type="submit" disabled data-form-btn>
