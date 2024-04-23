@@ -590,36 +590,56 @@ Product illustrations and packaging design
 
 <p>To get started, simply fill out the form below with your project details. Once I receive your request, I'll review it carefully and respond promptly to discuss your requirements and provide you with a personalized quote.</p>
 
-<form>
-  <label for="name">Name:</label>
-  <input type="text" id="name" name="name" required><br>
+<section class="contact-form">
+  <h3 class="h3 form-title">Commission Form</h3>
 
-  <label for="email">Email address:</label>
-  <input type="email" id="email" name="email" required><br>
+  <form action="#" class="form" data-form>
 
-  <label for="subject">Subject of portrait:</label>
-  <select id="subject" name="subject" required>
-    <option value="self">Yourself</option>
-    <option value="loved_one">A loved one</option>
-    <option value="group">Group of people</option>
-  </select><br>
+    <div class="input-wrapper">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" class="form-input" placeholder="Full name" required data-form-input>
+    </div>
 
-  <label for="style">Desired portrait style:</label>
-  <select id="style" name="style" required>
-    <option value="realistic">Realistic</option>
-    <option value="stylized">Stylized</option>
-    <option value="caricature">Caricature</option>
-  </select><br>
+    <div class="input-wrapper">
+      <label for="email">Email address:</label>
+      <input type="email" id="email" name="email" class="form-input" placeholder="Email address" required data-form-input>
+    </div>
 
-  <label for="photos">Photo(s) of the subject(s):</label>
-  <input type="file" id="photos" name="photos[]" multiple accept="image/*"><br>
+    <div class="input-wrapper">
+      <label for="subject">Subject of portrait:</label>
+      <select id="subject" name="subject" class="form-input" required data-form-input>
+        <option value="self">Yourself</option>
+        <option value="loved_one">A loved one</option>
+        <option value="group">Group of people</option>
+      </select>
+    </div>
 
-  <label for="details">Additional details and customization requests:</label>
-  <textarea id="details" name="details" rows="5"></textarea><br>
+    <div class="input-wrapper">
+      <label for="style">Desired portrait style:</label>
+      <select id="style" name="style" class="form-input" required data-form-input>
+        <option value="realistic">Realistic</option>
+        <option value="stylized">Stylized</option>
+        <option value="caricature">Caricature</option>
+      </select>
+    </div>
 
-  <button type="submit">Submit Request</button>
-</form>
+    <div class="input-wrapper">
+      <label for="photos">Photo(s) of the subject(s):</label>
+      <input type="file" id="photos" name="photos[]" multiple accept="image/*" class="form-input" data-form-input>
+    </div>
 
+    <div class="input-wrapper">
+      <label for="details">Additional details and customization requests:</label>
+      <textarea id="details" name="details" rows="5" class="form-input" data-form-input></textarea>
+    </div>
+
+    <button class="form-btn" type="submit" disabled data-form-btn>
+      <ion-icon name="paper-plane"></ion-icon>
+      <span>Send Commission Request</span>
+    </button>
+
+  </form>
+</section>
 <h3 class="h3 form-title">Pricing and Turnaround Time</h3>
 
 <p>The pricing for digital portraits varies depending on the style, size, and complexity of the artwork. I offer competitive rates and flexible payment options. The turnaround time typically ranges from 1 to 2 weeks, depending on the scope of the project.</p>
