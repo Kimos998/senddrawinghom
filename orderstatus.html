@@ -176,7 +176,7 @@
         - #CONTACT
       -->
 
-      <article style="color: var(--white-2);" class="contact active" data-page="OrderStatus">
+      <article style="color: var(--white-2);" class="contact active" data-page="order status">
 
         <header>
           <h2 class="h2 article-title">Order Status</h2>
@@ -287,7 +287,7 @@
 
 <!--- js nav bar to chang-->
 <script>
-  document.addEventListener("DOMContentLoaded", function() {
+ document.addEventListener("DOMContentLoaded", function() {
     const navLinks = document.querySelectorAll('.navbar-link');
     navLinks.forEach(link => {
         link.addEventListener('click', function() {
@@ -298,12 +298,13 @@
             }
             this.classList.add('active');
 
-            const pageName = this.textContent.toLowerCase(); // اسم الصفحة المستهدفة
+            const pageName = this.textContent.toLowerCase().replace(/\s/g, ''); // اسم الصفحة المستهدفة بدون فراغات
             const pageURL = `/senddrawinghom/${pageName}.html`; // تكوين رابط الصفحة المستهدفة
             window.location.href = pageURL; // تحويل الصفحة إلى الرابط المستهدف
         });
     });
 });
+
 
   
   
