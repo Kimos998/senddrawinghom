@@ -790,12 +790,19 @@ Product illustrations and packaging design
 
 
 
- <!--- js nav bar to chang-->
+<!--- js nav bar to chang-->
 <script>
   document.addEventListener("DOMContentLoaded", function() {
     const navLinks = document.querySelectorAll('.navbar-link');
     navLinks.forEach(link => {
       link.addEventListener('click', function() {
+        // تحديد العنصر النشط حاليا وتغيير لونه
+        const activeLink = document.querySelector('.navbar-link.active');
+        if (activeLink) {
+          activeLink.classList.remove('active');
+        }
+        this.classList.add('active');
+
         const pageName = this.textContent.toLowerCase(); // اسم الصفحة المستهدفة
         const articles = document.querySelectorAll('article');
         articles.forEach(article => {
