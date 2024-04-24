@@ -1,0 +1,114 @@
+  <link rel="stylesheet" href="https://codewithsadee.github.io/vcard-personal-portfolio/assets/css/style.css">
+
+
+
+
+<form action="#" class="form" style="color: white;" id="portrait-form" data-form>
+    <!-- عنصر الانتظار -->
+    <div class="loading-overlay" style="display:none ;">
+        <img src="https://c.tenor.com/HQx5-y1Hs5MAAAAC/tenor.gif"style="margin-left: auto;margin-right: auto;margin-top: 50px;margin-bottom: 50px;height: 150px;" alt="Loading...">
+    </div>
+
+    <!-- رسالة النجاح والمعرف المولد -->
+    <div class="success-message" style="display: none; text-align: center;margin-top: 50px;margin-bottom: 50px;">
+        <p>Your Commission Request has been sent successfully.</p>
+        <p>Your Order ID:</p>
+        <p id="order-id-value" style="font-weight: bold; font-size: 20px;"></p>
+    </div>
+
+    <!-- مكونات النموذج -->
+    <div class="input-wrapper">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" class="form-input" placeholder="Full name" required data-form-input>
+    </div>
+
+    <div class="input-wrapper">
+        <label for="email">Email address:</label>
+        <input type="email" id="email" name="email" class="form-input" placeholder="Email address" required data-form-input>
+    </div>
+
+    <div class="input-wrapper">
+        <label for="subject">Subject of portrait:</label>
+        <input type="text" id="subject" name="subject" class="form-input" placeholder="Yourself, a loved one, or a group of people" required data-form-input>
+    </div>
+
+    <div class="input-wrapper">
+        <label for="photos">Photo of the subject(s):</label>
+        <input type="file" id="photos" name="photos" multiple accept="image/*" class="form-input" data-form-input>
+    </div>
+
+    <div class="input-wrapper">
+        <label for="background">Background description:</label>
+        <input type="text" id="background" name="background" class="form-input" placeholder="Describe your desired background" data-form-input>
+    </div>
+
+    <div class="input-wrapper">
+        <label for="text">Text elements:</label>
+        <input type="text" id="text" name="text" class="form-input" placeholder="Include a name, message, or quote" data-form-input>
+    </div>
+
+    <button class="form-btn" type="submit" data-form-btn>
+        <ion-icon name="paper-plane"></ion-icon>
+        <span>Send Commission Request</span>
+    </button>
+</form>
+
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('portrait-form');
+    const submitButton = form.querySelector('[data-form-btn]');
+    const loadingOverlay = document.querySelector('.loading-overlay');
+    const successMessage = document.querySelector('.success-message');
+    const orderIdValue = document.getElementById('order-id-value');
+    const loadingIcon = '<ion-icon name="refresh-circle" class="loading-icon"></ion-icon>';
+    
+    function generateRandomCode(length) {
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        let result = '';
+        for (let i = 0; i < length; i++) {
+            result += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+        return result;
+    }
+    
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
+        const inputWrappers = document.querySelectorAll('.input-wrapper');
+        inputWrappers.forEach(wrapper => {
+            wrapper.style.display = 'none'; // إخفاء مكونات النموذج
+        });
+        submitButton.style.display = 'none'; // إخفاء زر الإرسال
+        loadingOverlay.style.display = 'block'; // عرض صورة الانتظار
+    
+        const formData = new FormData(form);
+        const randomCode = generateRandomCode(9);
+        formData.append('orderID', randomCode);
+    
+        fetch('https://script.google.com/macros/s/AKfycbzfTa5Sa_5jDLjfLQFKPP1BoFFauPu8MqMCZue66svYb93HR3hBeBUpGXGKlHn2u-LHtQ/exec', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.result === 'success') {
+                orderIdValue.textContent = randomCode;
+                successMessage.style.display = 'block';
+            } else {
+                throw new Error('Failed to send the commission request. Please try again later.');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert(error.message);
+        })
+        .finally(() => {
+            loadingOverlay.style.display = 'none'; // إخفاء صورة الانتظار بعد الانتهاء
+        });
+    });
+});
+
+
+</script>
+
