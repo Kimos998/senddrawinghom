@@ -626,8 +626,6 @@ Product illustrations and packaging design
       <input type="text" id="subject" name="subject" class="form-input" placeholder="Yourself, a loved one, or a group of people" required data-form-input>
     </div>
 
-   
-
     <div class="input-wrapper">
       <label for="photos">Photo of the subject(s):</label>
       <input type="file" id="photos" name="photos[]" multiple accept="image/*" class="form-input" data-form-input>
@@ -643,7 +641,7 @@ Product illustrations and packaging design
       <input type="text" id="text" name="text" class="form-input" placeholder="Include a name, message, or quote" data-form-input>
     </div>
 
-    <button class="form-btn" type="submit" disabled data-form-btn>
+    <button class="form-btn" type="submit" data-form-btn>
       <ion-icon name="paper-plane"></ion-icon>
       <span>Send Commission Request</span>
     </button>
@@ -787,7 +785,7 @@ Product illustrations and packaging design
 
 <!--- js nav bar to chang-->
 <script>
-  document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", function() {
     const navLinks = document.querySelectorAll('.navbar-link');
     navLinks.forEach(link => {
       link.addEventListener('click', function() {
@@ -809,6 +807,63 @@ Product illustrations and packaging design
       });
     });
   });
+  
+  
+  
+  
+document.addEventListener('DOMContentLoaded', function() {
+  const form = document.querySelector('[data-form]');
+  const submitButton = form.querySelector('[data-form-btn]');
+  const loadingOverlay = document.querySelector('.loading-overlay'); // العنصر الذي يحتوي على الصورة المنبثقة
+  const successMessage = document.querySelector('.success-message');
+  const orderIdValue = document.getElementById('order-id-value');
+  const loadingIcon = '<ion-icon name="refresh-circle" class="loading-icon"></ion-icon>';
+  
+  function generateRandomCode(length) {
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let result = '';
+    for (let i = 0; i < length; i++) {
+      result += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return result;
+  }
+
+  form.addEventListener('submit', function(event) {
+    event.preventDefault();
+    submitButton.disabled = true;
+    loadingOverlay.style.display = 'block'; // عرض الصورة المنبثقة عند النقر على الزر
+    submitButton.innerHTML = loadingIcon + '<span>Sending...</span>'; // تغيير النص إلى "Sending..."
+    document.querySelector('.contact-form').style.display = 'none'; // إخفاء نموذج الاتصال
+
+    const formData = new FormData(form);
+    const randomCode = generateRandomCode(9);
+    formData.append('order ID', randomCode);
+
+    fetch('https://script.google.com/macros/s/AKfycbzfTa5Sa_5jDLjfLQFKPP1BoFFauPu8MqMCZue66svYb93HR3hBeBUpGXGKlHn2u-LHtQ/exec', {
+      method: 'POST',
+      body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+      orderIdValue.textContent = randomCode;
+      successMessage.style.display = 'block';
+      form.reset();
+      submitButton.disabled = false; // تمكين الزر بعد الانتهاء من الإرسال
+      submitButton.innerHTML = '<ion-icon name="paper-plane"></ion-icon><span>Send Commission Request</span>'; // إعادة تعيين النص إلى الحالة الأولية
+      loadingOverlay.style.display = 'none'; // إخفاء الصورة المنبثقة عند ظهور رسالة النجاح
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      submitButton.disabled = false; // تمكين الزر في حالة الفشل
+      submitButton.innerHTML = '<ion-icon name="paper-plane"></ion-icon><span>Send Commission Request</span>'; // إعادة تعيين النص إلى الحالة الأولية
+      loadingOverlay.style.display = 'none'; // إخفاء الصورة المنبثقة عند فشل الإرسال
+      document.querySelector('.contact-form').style.display = 'block'; // إعادة عرض نموذج الاتصال في حالة فشل الإرسال
+    });
+  });
+
+  // الكود الحالي لتفعيل وتعطيل الزر الإرسال
+});  
+  
 </script>
 
 
