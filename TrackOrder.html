@@ -1,6 +1,213 @@
-<link rel="stylesheet" href="https://codewithsadee.github.io/vcard-personal-portfolio/assets/css/style.css">
+<!DOCTYPE html>
+<html lang="en">
 
-    <form action="#" class="form"  id="status-form" data-form>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>vCard - Personal Portfolio</title>
+
+  <!--
+    - favicon
+  -->
+  <link rel="shortcut icon" href="https://codewithsadee.github.io/vcard-personal-portfolio/assets/images/logo.ico" type="image/x-icon">
+
+  <!--
+    - custom css link
+  -->
+  <link rel="stylesheet" href="https://codewithsadee.github.io/vcard-personal-portfolio/assets/css/style.css">
+
+  <!--
+    - google font link
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+  <!--
+    - #MAIN
+  -->
+
+  <main>
+
+    <!--
+      - #SIDEBAR
+    -->
+
+    <aside class="sidebar" data-sidebar>
+
+      <div class="sidebar-info">
+
+        <figure class="avatar-box">
+          <img src="./assets/ach.png" alt="ACH Dev" width="80">
+        </figure>
+
+        <div class="info-content">
+          <h1 class="name" title="Richard hanrick">ACH Dev</h1>
+
+          <p class="title">Graphic designer</p>
+        </div>
+
+        <button class="info_more-btn" data-sidebar-btn>
+          <span>Show mail Contact</span>
+
+          <ion-icon name="chevron-down"></ion-icon>
+        </button>
+
+      </div>
+
+      <div class="sidebar-info_more">
+
+        <div class="separator"></div>
+
+        <ul class="contacts-list">
+
+          <li class="contact-item">
+
+            <div class="icon-box">
+              <ion-icon name="mail-outline"></ion-icon>
+            </div>
+
+            <div class="contact-info">
+              <p class="contact-title">Email</p>
+
+              <a href="mailto:achdev.contact@gmail.com" class="contact-link">achdev.contact@gmail.com</a>
+            </div>
+
+          </li>
+
+          <li class="contact-item">
+
+            
+
+        </ul>
+
+        <div class="separator"></div>
+
+        <ul class="social-list">
+
+          <li class="social-item">
+            <a href="#" class="social-link">
+              <ion-icon name="logo-facebook"></ion-icon>
+            </a>
+          </li>
+
+          <li class="social-item">
+            <a href="#" class="social-link">
+              <ion-icon name="logo-twitter"></ion-icon>
+            </a>
+          </li>
+
+          <li class="social-item">
+            <a href="#" class="social-link">
+              <ion-icon name="logo-instagram"></ion-icon>
+            </a>
+          </li>
+
+        </ul>
+
+      </div>
+
+    </aside>
+
+
+
+
+
+    <!--
+      - #main-content
+    -->
+
+    <div class="main-content">
+
+      <!--
+        - #NAVBAR
+      -->
+
+      <nav class="navbar">
+
+        <ul class="navbar-list">
+<li class="navbar-item">
+            <button class="navbar-link" data-nav-link>Portrait On Demand</button>
+          </li>
+
+         
+          <li class="navbar-item">
+            <button class="navbar-link" data-nav-link>About</button>
+          </li>
+
+          <li class="navbar-item">
+            <button class="navbar-link" data-nav-link>The Gallery</button>
+          </li>
+
+<li class="navbar-item">
+            <button class="navbar-link active" data-nav-link>order status</button>
+          </li>
+
+         <!--
+        -  <li class="navbar-item">
+            <button class="navbar-link" data-nav-link>Contact</button>
+          </li>-->
+
+   
+
+
+
+        </ul>
+
+      </nav>
+
+
+
+
+
+
+
+
+      
+
+
+
+
+      <!--
+        - #CONTACT
+      -->
+
+      <article style="color: var(--white-2);" class="contact active" data-page="order status">
+
+        <header>
+          <h2 class="h2 article-title">Order Status</h2>
+        </header>
+
+  <p>We understand that you may be eager to receive your commissioned portrait, and we appreciate your patience as we work through a high volume of requests. To ensure that you can easily track the progress of your request, we have implemented a streamlined tracking system.</p>
+  
+<br>
+
+  <h3 class="h3 form-title">Locate Your Order Information</h3>
+
+  <p>To track your portrait commission request, you will need your order ID and the email address associated with your order.</p>
+<br>
+  <ul>
+    <li><strong>Order ID:</strong> The unique order ID is typically provided to the customer at the time they place their order. It may be displayed on a confirmation page.</li>
+   <br> <li><strong>Email Address:</strong> Please enter the email address you used when placing your order.</li>
+  </ul>
+
+<br>
+
+ <h3 class="h3 form-title">Access the Order Tracking Portal</h3>
+
+  <p>Once you have your order ID and email address ready, follow these steps to access the order tracking portal:</p>
+<br>
+  <ol>
+  <li><strong>Enter Order Information:</strong> In the designated fields, enter your order ID and the email address associated with your order.</li>
+   <br> <li><strong>Submit Tracking Request:</strong> Click the "Track Order" button or follow the instructions provided on the tracking portal.</li>
+  </ol>
+
+  <section class="contact-form">
+          <form action="#" class="form"  id="status-form" data-form>
         <div class="input-wrapper" style="margin-top: 50px;">
             <input type="email" name="email" class="form-input" placeholder="Email address" required data-form-input>
         </div>
@@ -20,9 +227,92 @@
 
     <div style="color: white;margin-top: 50px;text-align: center;margin-right: 20px;margin-left: 20px;" class="success-message" style="display: none;"></div>
     <div style="color: white;background-color: navy;margin-top: 50px;text-align: center;margin-right: 20px;margin-left: 20px;" class="status-message" style="display: none;"></div>
+  </section>
 
-    <script>
-        function startSearch() {
+  <h3 class="h3 form-title">View Your Order Status</h3>
+
+  <p>Upon submitting your tracking request, the portal will display the current status of your order. This will provide you with an update on the progress of your portrait commission.</p>
+<br>
+
+  <h3 class="h3 form-title">Order Status Information</h3>
+
+  <p>The order status information may include details such as:</p>
+<br>
+  <ul>
+    <li><strong>Order Placed:</strong> Indicates that your order has been received and is being processed.</li>
+  <br>  <li><strong>Sketching:</strong> The artist is currently working on the initial sketch of your portrait.</li>
+ <br>   <li><strong>Refining:</strong> The artist is refining the details and adding finishing touches to your portrait.</li>
+ <br>   <li><strong>Finalizing:</strong> Your portrait is nearing completion and undergoing final checks.</li>
+    <br><li><strong>Ready for Review:</strong> Your portrait is complete and ready for your approval.</li>
+    <br><li><strong>Awaiting Feedback:</strong> The artist is awaiting your feedback and approval of the final portrait.</li>
+    <br><li><strong>Shipped:</strong> Your portrait has been shipped and is on its way to you.</li>
+   <br> <li><strong>Delivered:</strong> Your portrait has been successfully delivered.</li>
+  </ul>
+  
+<br>
+
+  <h3 class="h3 form-title">Additional Support</h3>
+
+  <p>If you encounter any difficulties accessing the tracking portal, retrieving your order information, or have any questions about the status of your order, please do not hesitate to contact our customer support team. We are always here to assist you and ensure a smooth and satisfying experience.</p>
+<br>
+
+ 
+
+          <h3 class="h3 article-title">Contact Us</h3>
+
+          
+
+            <button class="form-btn" type="submit" disabled data-form-btn>
+              <ion-icon name="paper-plane"></ion-icon>
+              <span>Send Message</span>
+            </button>
+
+          <br>
+        
+  <h3 class="h3 form-title">Patience and Understanding</h3>
+
+  <p>We appreciate your understanding as we work diligently to fulfill your portrait commission requests. We take pride in delivering high-quality portraits while maintaining a timely process. Please allow us reasonable time to complete your portrait, considering the artistic process and the volume of requests we receive.</p>
+<br>
+  <p>We are committed to keeping you informed throughout the process and providing exceptional customer service. Thank you for choosing our services and trusting us with your portrait commission.</p>
+      </article>
+
+    </div>
+
+  </main>
+
+
+
+
+
+
+<!--- js nav bar to chang-->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+    const navLinks = document.querySelectorAll('.navbar-link');
+    navLinks.forEach(link => {
+      link.addEventListener('click', function() {
+        // تحديد العنصر النشط حاليا وتغيير لونه
+        const activeLink = document.querySelector('.navbar-link.active');
+        if (activeLink) {
+          activeLink.classList.remove('active');
+        }
+        this.classList.add('active');
+
+        const pageName = this.textContent.toLowerCase(); // اسم الصفحة المستهدفة
+        const articles = document.querySelectorAll('article');
+        articles.forEach(article => {
+          article.classList.remove('active'); // إزالة فئة النشاط من جميع الصفحات
+          if (article.getAttribute('data-page') === pageName) {
+            article.classList.add('active'); // إضافة فئة النشاط للصفحة المستهدفة فقط
+          }
+        });
+      });
+    });
+  });
+  
+  
+  
+   function startSearch() {
             const form = document.getElementById('status-form');
             const submitButton = form.querySelector('[data-form-btn]');
             const inputWrappers = form.querySelectorAll('.input-wrapper');
@@ -95,6 +385,24 @@
                         loadingImage.style.display = 'none';
                     });
             });
-        });
-    </script>
+        }); 
 
+</script>
+
+
+
+
+  <!--
+    - custom js link
+  -->
+  <script src="https://codewithsadee.github.io/vcard-personal-portfolio//assets/js/script.js"></script>
+
+  <!--
+    - ionicon link
+  -->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+</body>
+
+</html>
