@@ -1,0 +1,100 @@
+<link rel="stylesheet" href="https://codewithsadee.github.io/vcard-personal-portfolio/assets/css/style.css">
+
+    <form action="#" class="form"  id="status-form" data-form>
+        <div class="input-wrapper" style="margin-top: 50px;">
+            <input type="email" name="email" class="form-input" placeholder="Email address" required data-form-input>
+        </div>
+        <div class="input-wrapper">
+            <input type="text" name="order ID" class="form-input" placeholder="order ID" required data-form-input>
+        </div>
+        <button class="form-btn" type="submit" data-form-btn onclick="startSearch()">
+            <ion-icon name="paper-plane"></ion-icon>
+            <span>Track Order</span>
+        </button>
+        <img src="https://c.tenor.com/HQx5-y1Hs5MAAAAC/tenor.gif" alt="Loading" class="loading-image" style="display: none;margin-left: auto;margin-right: auto;margin-top: 50px;margin-bottom: 50px;height: 150px;">
+    </form>
+
+    <div class="loading-overlay" style="display: none;">
+        <div class="loading-icon"></div>
+    </div>
+
+    <div style="color: white;margin-top: 50px;text-align: center;margin-right: 20px;margin-left: 20px;" class="success-message" style="display: none;"></div>
+    <div style="color: white;background-color: navy;margin-top: 50px;text-align: center;margin-right: 20px;margin-left: 20px;" class="status-message" style="display: none;"></div>
+
+    <script>
+        function startSearch() {
+            const form = document.getElementById('status-form');
+            const submitButton = form.querySelector('[data-form-btn]');
+            const inputWrappers = form.querySelectorAll('.input-wrapper');
+            const loadingImage = document.querySelector('.loading-image');
+            
+            submitButton.style.display = 'none';
+            inputWrappers.forEach(wrapper => {
+                wrapper.style.display = 'none';
+            });
+            loadingImage.style.display = 'block';
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('status-form');
+            const loadingOverlay = document.querySelector('.loading-overlay');
+            const successMessage = document.querySelector('.success-message');
+            const statusMessage = document.querySelector('.status-message');
+            const loadingImage = document.querySelector('.loading-image');
+            
+            function fetchOrderData(email, orderID) {
+                const url = `https://sheets.googleapis.com/v4/spreadsheets/1buoEKat6J_kpdcPXzT-adXnNGmO1Stw57ivYoBfEGw0/values/Sheet1!A1:I100?key=AIzaSyB5WTjIR5OZt108xl9uQApzeoNRWuMyYRE`;
+                return fetch(url)
+                    .then(response => response.json())
+                    .then(data => {
+                        const values = data.values;
+                        for (let i = 1; i < values.length; i++) {
+                            if (values[i][0] === orderID && values[i][3] === email) {
+                                return values[i];
+                            }
+                        }
+                        return null;
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('Failed to fetch order data. Please try again later.');
+                    });
+            }
+            
+            form.addEventListener('submit', function(event) {
+                event.preventDefault();
+                loadingOverlay.style.display = 'block';
+                
+                const formData = new FormData(form);
+                const email = formData.get('email');
+                const orderID = formData.get('order ID');
+                
+                fetchOrderData(email, orderID)
+                    .then(orderData => {
+                        if (orderData) {
+                            const [_, __, name, __email, ___, ____, background, text, status] = orderData;
+                            successMessage.innerHTML = `
+                                <p>Welcome dear <span style="color: var(--orange-yellow-crayola);">${name}</span> to our Order Tracking section.</p>
+                                <p>We are pleased to inform you that your order under the ID : <span style="color: var(--orange-yellow-crayola);">${orderID}</span> has been successfully received.</p>
+                                <p>It is :<span style="color: var(--orange-yellow-crayola);">${status}</span></p>
+                                <p>Upon completion of the remaining review and inspection procedures by our auditing expert, it will be sent to your email :<span style="color: var(--orange-yellow-crayola);">${email}</span></p>
+                                <p>Thank you for your trust in us. We look forward to hearing your feedback on our service on our social media platforms.</p>
+                            `;
+                            successMessage.style.display = 'block';
+                        } else {
+                            statusMessage.textContent = 'Sorry, no order found under this ID and email combination. Please try again later or contact us if you are sure you have placed an order.';
+                            statusMessage.style.display = 'block';
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('Failed to fetch order data. Please try again later.');
+                    })
+                    .finally(() => {
+                        loadingOverlay.style.display = 'none';
+                        loadingImage.style.display = 'none';
+                    });
+            });
+        });
+    </script>
+
