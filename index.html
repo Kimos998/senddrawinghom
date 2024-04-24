@@ -846,7 +846,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const formData = new FormData(form);
     const randomCode = generateRandomCode(9);
-    formData.append('order ID', randomCode);
+    formData.append('orderID', randomCode);
 
     fetch('https://script.google.com/macros/s/AKfycbzfTa5Sa_5jDLjfLQFKPP1BoFFauPu8MqMCZue66svYb93HR3hBeBUpGXGKlHn2u-LHtQ/exec', {
       method: 'POST',
