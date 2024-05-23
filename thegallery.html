@@ -7,19 +7,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>vCard - Personal Portfolio</title>
 
-  <!--
-    - favicon
-  -->
+  <!-- favicon -->
   <link rel="shortcut icon" href="https://codewithsadee.github.io/vcard-personal-portfolio/assets/images/logo.ico" type="image/x-icon">
 
-  <!--
-    - custom css link
-  -->
+  <!-- custom css link -->
   <link rel="stylesheet" href="https://codewithsadee.github.io/vcard-personal-portfolio/assets/css/style.css">
 
-  <!--
-    - google font link
-  -->
+  <!-- google font link -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -27,15 +21,11 @@
 
 <body>
 
-  <!--
-    - #MAIN
-  -->
+  <!-- MAIN -->
 
   <main>
 
-    <!--
-      - #SIDEBAR
-    -->
+    <!-- SIDEBAR -->
 
     <aside class="sidebar" data-sidebar>
 
@@ -89,15 +79,11 @@
 
     </aside>
 
-    <!--
-      - #main-content
-    -->
+    <!-- main-content -->
 
     <div class="main-content">
 
-      <!--
-        - #NAVBAR
-      -->
+      <!-- NAVBAR -->
 
       <nav class="navbar">
         <ul class="navbar-list">
@@ -116,9 +102,7 @@
         </ul>
       </nav>
 
-      <!--
-        - #PORTFOLIO
-      -->
+      <!-- PORTFOLIO -->
 
       <article style="color: var(--white-2);" class="portfolio active" data-page="the gallery">
         <header>
@@ -126,9 +110,13 @@
         </header>
         <section class="projects">
           <ul class="project-list" id="project-list">
-            <!-- سيتم ملء المحتوى ديناميكيًا هنا -->
+            <!-- Dynamic content will be filled here -->
           </ul>
         </section>
+        <!-- Loader Image -->
+        <div class="article-loader">
+          <div class="loader-image"></div>
+        </div>
       </article>
 
       <style>
@@ -158,28 +146,53 @@
         .project-img:hover img {
           transform: scale(1.1);
         }
+
+        .article-loader {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: hsl(240, 2%, 13%); /* Semi-transparent background color */
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+
+        .loader-image {
+          width: 50px;
+          height: 50px;
+          background-image: url('https://kimos998.github.io/senddrawinghom/assets/reload.png'); /* Set the path to your loader image */
+          background-size: cover;
+          animation: rotate 1s linear infinite; /* تحديد دوران سلس لمدة 1 ثانية بشكل متكرر */
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg); /* زاوية البداية للدوران (0 درجة) */
+  }
+  to {
+    transform: rotate(360deg); /* زاوية النهاية للدوران (360 درجة) */
+  }
+}
       </style>
 
       <script>
-
-     document.addEventListener("DOMContentLoaded", function() {
-    const navLinks = document.querySelectorAll('.navbar-link');
-    navLinks.forEach(link => {
-        link.addEventListener('click', function() {
-            // تحديد العنصر النشط حاليا وتغيير لونه
-            const activeLink = document.querySelector('.navbar-link.active');
-            if (activeLink) {
+        document.addEventListener("DOMContentLoaded", function() {
+          const navLinks = document.querySelectorAll('.navbar-link');
+          navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+              const activeLink = document.querySelector('.navbar-link.active');
+              if (activeLink) {
                 activeLink.classList.remove('active');
-            }
-            this.classList.add('active');
-
-            const pageName = this.textContent.toLowerCase().replace(/\s/g, ''); // اسم الصفحة المستهدفة بدون فراغات
-            const pageURL = `/senddrawinghom/${pageName}.html`; // تكوين رابط الصفحة المستهدفة
-            window.location.href = pageURL; // تحويل الصفحة إلى الرابط المستهدف
+              }
+              this.classList.add('active');
+              const pageName = this.textContent.toLowerCase().replace(/\s/g, '');
+              const pageURL = `/senddrawinghom/${pageName}.html`;
+              window.location.href = pageURL;
+            });
+          });
         });
-    });
-}); 
-  
 
 
         async function fetchGalleryData() {
@@ -213,7 +226,7 @@
           li.appendChild(figure);
           li.appendChild(h3);
 
-          return li;
+          return li
         }
 
         async function populateGallery() {
@@ -226,6 +239,12 @@
             const projectItem = createProjectItem(imageUrl, characterName);
             projectList.appendChild(projectItem);
           });
+
+          // Remove loader when data is loaded
+          const loader = document.querySelector('.article-loader');
+          if (loader) {
+            loader.remove();
+          }
         }
 
         populateGallery();
@@ -235,7 +254,7 @@
 
   </main>
 
-  <!--- js nav bar to change-->
+  <!-- js nav bar to change -->
   <script>
     document.addEventListener("DOMContentLoaded", function() {
       const navLinks = document.querySelectorAll('.navbar-link');
@@ -246,22 +265,19 @@
             activeLink.classList.remove('active');
           }
           this.classList.add('active');
-          const pageName = this.textContent.toLowerCase().replace(/\s/g، '');
-const pageURL = /senddrawinghom/${pageName}.html;
-window.location.href = pageURL;
-});
-});
-});
-</script>
+          const pageName = this.textContent.toLowerCase().replace(/\s/g, '');
+          const pageURL = `/senddrawinghom/${pageName}.html`;
+          window.location.href = pageURL;
+        });
+      });
+    });
+  </script>
 
-  <!--
-    - custom js link
-  -->
+  <!-- custom js link -->
   <script src="https://codewithsadee.github.io/vcard-personal-portfolio/assets/js/script.js"></script>
-  <!--
-    - ionicon link
-  -->
+  <!-- ionicon link -->
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
+
 </html>
