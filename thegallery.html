@@ -161,6 +161,31 @@
       </style>
 
       <script>
+
+    document.addEventListener("DOMContentLoaded", function() {
+    const navLinks = document.querySelectorAll('.navbar-link');
+    navLinks.forEach(link => {
+      link.addEventListener('click', function() {
+        // تحديد العنصر النشط حاليا وتغيير لونه
+        const activeLink = document.querySelector('.navbar-link.active');
+        if (activeLink) {
+          activeLink.classList.remove('active');
+        }
+        this.classList.add('active');
+
+        const pageName = this.textContent.toLowerCase(); // اسم الصفحة المستهدفة
+        const articles = document.querySelectorAll('article');
+        articles.forEach(article => {
+          article.classList.remove('active'); // إزالة فئة النشاط من جميع الصفحات
+          if (article.getAttribute('data-page') === pageName) {
+            article.classList.add('active'); // إضافة فئة النشاط للصفحة المستهدفة فقط
+          }
+        });
+      });
+    });
+  });
+
+
         async function fetchGalleryData() {
           const url = 'https://sheets.googleapis.com/v4/spreadsheets/16nsDPICu5mqT6CMtadaO47P7w0QY2cf-HpfsYtBxvcg/values/Gallery!A1:I100?key=AIzaSyB5WTjIR5OZt108xl9uQApzeoNRWuMyYRE';
           const response = await fetch(url);
