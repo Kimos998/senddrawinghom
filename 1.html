@@ -328,11 +328,19 @@
     overflow: hidden;
 }
 
-.project-img img {
+.project-img {
+    position: relative;
     width: 100%;
-    height: auto;
-    max-width: 100%;
-    max-height: 100%;
+    height: 0;
+    padding-bottom: 100%; /* جعل الإطار مربعًا */
+}
+
+.project-img img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     object-fit: cover;  /* لقص الصورة بشكل متناسب مع المربع */
 }
 
@@ -351,16 +359,15 @@
 .popup-img {
     margin: auto;
     display: block;
-    width: 90%;
-    height: 90%;
+    max-width: 90%;
+    max-height: 90%;
     object-fit: contain;  /* لضمان احتواء الصورة بالكامل */
-    margin-top: 70px;
 }
 
 .close-popup {
     position: absolute;
     top: 10px;
-    left: 20px;
+    right: 20px;
     color: white;
     font-size: 40px;
     font-weight: bold;
@@ -388,26 +395,18 @@ function createProjectItem(imageUrl, characterName) {
     const figure = document.createElement('figure');
     figure.className = 'project-img';
 
-    const iconBox = document.createElement('div');
-    iconBox.className = 'project-item-icon-box';
-
-    const ionIcon = document.createElement('ion-icon');
-    ionIcon.setAttribute('name', 'eye-outline');
-    iconBox.appendChild(ionIcon);
-
     const img = document.createElement('img');
     img.src = imageUrl;
     img.alt = characterName;
     img.loading = 'lazy';
     img.style.objectFit = 'cover';  // لقص الصورة بشكل متناسب مع المربع
 
-    // إضافة حدث عند الضغط على أيقونة "eye"
-    iconBox.addEventListener('click', function(event) {
+    // إضافة حدث عند الضغط على الصورة لعرض الديف المنبثقة
+    img.addEventListener('click', function(event) {
         event.preventDefault();
         showPopup(imageUrl);
     });
 
-    figure.appendChild(iconBox);
     figure.appendChild(img);
 
     const h3 = document.createElement('h3');
