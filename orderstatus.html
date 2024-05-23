@@ -251,10 +251,11 @@
 
           
 
-            <button style="width: 100%;"class="form-btn" type="submit" disabled data-form-btn>
-              <ion-icon name="paper-plane"></ion-icon>
-              <span>Send Message</span>
+            <button id="send-message-btn" style="width: 100%;" class="form-btn" type="submit" disabled data-form-btn>
+             <ion-icon name="paper-plane"></ion-icon>
+            <span>Send Message</span>
             </button>
+
 
           <br>
         
@@ -372,6 +373,16 @@
                     });
             });
         }); 
+
+document.addEventListener("DOMContentLoaded", function() {
+  const sendMessageBtn = document.getElementById('send-message-btn');
+  sendMessageBtn.addEventListener('click', function() {
+    window.location.href = 'contact.html';
+  });
+});
+
+
+
 
 </script>
 
