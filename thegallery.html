@@ -89,20 +89,8 @@
 
         <ul class="social-list">
 
-          <li class="social-item">
-            <a href="#" class="social-link">
-              <ion-icon name="logo-facebook"></ion-icon>
-            </a>
-          </li>
-
-          <li class="social-item">
-            <a href="#" class="social-link">
-              <ion-icon name="logo-twitter"></ion-icon>
-            </a>
-          </li>
-
-          <li class="social-item">
-            <a href="#" class="social-link">
+           <li class="social-item">
+            <a href="https://www.instagram.com/ach_digitalart/" class="social-link">
               <ion-icon name="logo-instagram"></ion-icon>
             </a>
           </li>
@@ -177,237 +165,99 @@
         - #PORTFOLIO
       -->
 
-      <article class="portfolio active" data-page="the gallery">
+     <article class="portfolio" data-page="the gallery">
+
+    <header>
+        <h2 class="h2 article-title">The Gallery</h2>
+    </header>
+
+    <section class="projects">
+        <ul class="project-list" id="project-list">
+            <!-- سيتم ملء المحتوى ديناميكيًا هنا -->
+        </ul>
+    </section>
+    
+</article>
+
+<style>
+.portfolio {
+    position: relative;
+    overflow: hidden;
+}
+
+.project-img {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 100%; /* جعل الإطار مربعًا */
+    overflow: hidden;
+    transition: transform 0.3s ease; /* تأثير التحول عند تمرير الماوس */
+}
+
+.project-img img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;  /* لقص الصورة بشكل متناسب مع المربع */
+}
+
+.project-img:hover img {
+    transform: scale(1.1); /* تكبير الصورة عند تمرير الماوس */
+}
+</style>
+
+<script>
+async function fetchGalleryData() {
+    const url = 'https://sheets.googleapis.com/v4/spreadsheets/16nsDPICu5mqT6CMtadaO47P7w0QY2cf-HpfsYtBxvcg/values/Gallery!A1:I100?key=AIzaSyB5WTjIR5OZt108xl9uQApzeoNRWuMyYRE';
+    const response = await fetch(url);
+    const data = await response.json();
+    return data.values;
+}
+
+function createProjectItem(imageUrl, characterName) {
+    const li = document.createElement('li');
+    li.className = 'project-item active';
+    li.setAttribute('data-filter-item', '');
+    li.setAttribute('data-category', 'artwork');
+
+    const figure = document.createElement('figure');
+    figure.className = 'project-img';
+
+    const img = document.createElement('img');
+    img.src = imageUrl;
+    img.alt = characterName;
+    img.loading = 'lazy';
+    img.style.objectFit = 'cover';  // لقص الصورة بشكل متناسب مع المربع
+
+    figure.appendChild(img);
+
+    const h3 = document.createElement('h3');
+    h3.className = 'project-title';
+    h3.textContent = characterName;
+
+    li.appendChild(figure);
+    li.appendChild(h3);
+
+    return li;
+}
+
+async function populateGallery() {
+    const projectList = document.getElementById('project-list');
+    const galleryData = await fetchGalleryData();
+
+    galleryData.slice(1).forEach(row => {
+        const imageUrl = row[0];  // افترض أن رابط الصورة في العمود الأول
+        const characterName = row[1];  // افترض أن اسم الشخصية في العمود الثاني
+        const projectItem = createProjectItem(imageUrl, characterName);
+        projectList.appendChild(projectItem);
+    });
+}
+
+populateGallery();
+</script>
 
-        <header>
-          <h2 class="h2 article-title">The Gallery</h2>
-        </header>
-
-        <section class="projects">
-
-          <ul class="filter-list">
-
-            <li class="filter-item">
-              <button class="active" data-filter-btn>All</button>
-            </li>
-
-            <li class="filter-item">
-              <button data-filter-btn>Web design</button>
-            </li>
-
-            <li class="filter-item">
-              <button data-filter-btn>Applications</button>
-            </li>
-
-            <li class="filter-item">
-              <button data-filter-btn>Web development</button>
-            </li>
-
-          </ul>
-
-          <div class="filter-select-box">
-
-            <button class="filter-select" data-select>
-
-              <div class="select-value" data-selecct-value>Select category</div>
-
-              <div class="select-icon">
-                <ion-icon name="chevron-down"></ion-icon>
-              </div>
-
-            </button>
-
-            <ul class="select-list">
-
-              <li class="select-item">
-                <button data-select-item>All</button>
-              </li>
-
-              <li class="select-item">
-                <button data-select-item>Web design</button>
-              </li>
-
-              <li class="select-item">
-                <button data-select-item>Applications</button>
-              </li>
-
-              <li class="select-item">
-                <button data-select-item>Web development</button>
-              </li>
-
-            </ul>
-
-          </div>
-
-          <ul class="project-list">
-
-            <li class="project-item  active" data-filter-item data-category="web development">
-              <a href="#">
-
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-
-                  <img src="./assets/images/project-1.jpg" alt="finance" loading="lazy">
-                </figure>
-
-                <h3 class="project-title">Finance</h3>
-
-                <p class="project-category">Web development</p>
-
-              </a>
-            </li>
-
-            <li class="project-item  active" data-filter-item data-category="web development">
-              <a href="#">
-
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-
-                  <img src="./assets/images/project-2.png" alt="orizon" loading="lazy">
-                </figure>
-
-                <h3 class="project-title">Orizon</h3>
-
-                <p class="project-category">Web development</p>
-
-              </a>
-            </li>
-
-            <li class="project-item  active" data-filter-item data-category="web design">
-              <a href="#">
-
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-
-                  <img src="./assets/images/project-3.jpg" alt="fundo" loading="lazy">
-                </figure>
-
-                <h3 class="project-title">Fundo</h3>
-
-                <p class="project-category">Web design</p>
-
-              </a>
-            </li>
-
-            <li class="project-item  active" data-filter-item data-category="applications">
-              <a href="#">
-
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-
-                  <img src="./assets/images/project-4.png" alt="brawlhalla" loading="lazy">
-                </figure>
-
-                <h3 class="project-title">Brawlhalla</h3>
-
-                <p class="project-category">Applications</p>
-
-              </a>
-            </li>
-
-            <li class="project-item  active" data-filter-item data-category="web design">
-              <a href="#">
-
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-
-                  <img src="./assets/images/project-5.png" alt="dsm." loading="lazy">
-                </figure>
-
-                <h3 class="project-title">DSM.</h3>
-
-                <p class="project-category">Web design</p>
-
-              </a>
-            </li>
-
-            <li class="project-item  active" data-filter-item data-category="web design">
-              <a href="#">
-
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-
-                  <img src="./assets/images/project-6.png" alt="metaspark" loading="lazy">
-                </figure>
-
-                <h3 class="project-title">MetaSpark</h3>
-
-                <p class="project-category">Web design</p>
-
-              </a>
-            </li>
-
-            <li class="project-item  active" data-filter-item data-category="web development">
-              <a href="#">
-
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-
-                  <img src="./assets/images/project-7.png" alt="summary" loading="lazy">
-                </figure>
-
-                <h3 class="project-title">Summary</h3>
-
-                <p class="project-category">Web development</p>
-
-              </a>
-            </li>
-
-            <li class="project-item  active" data-filter-item data-category="applications">
-              <a href="#">
-
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-
-                  <img src="./assets/images/project-8.jpg" alt="task manager" loading="lazy">
-                </figure>
-
-                <h3 class="project-title">Task Manager</h3>
-
-                <p class="project-category">Applications</p>
-
-              </a>
-            </li>
-
-            <li class="project-item  active" data-filter-item data-category="web development">
-              <a href="#">
-
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-
-                  <img src="./assets/images/project-9.png" alt="arrival" loading="lazy">
-                </figure>
-
-                <h3 class="project-title">Arrival</h3>
-
-                <p class="project-category">Web development</p>
-
-              </a>
-            </li>
-
-          </ul>
-
-        </section>
-
-      </article>
 
 
 
