@@ -162,28 +162,24 @@
 
       <script>
 
-    document.addEventListener("DOMContentLoaded", function() {
+     document.addEventListener("DOMContentLoaded", function() {
     const navLinks = document.querySelectorAll('.navbar-link');
     navLinks.forEach(link => {
-      link.addEventListener('click', function() {
-        // تحديد العنصر النشط حاليا وتغيير لونه
-        const activeLink = document.querySelector('.navbar-link.active');
-        if (activeLink) {
-          activeLink.classList.remove('active');
-        }
-        this.classList.add('active');
+        link.addEventListener('click', function() {
+            // تحديد العنصر النشط حاليا وتغيير لونه
+            const activeLink = document.querySelector('.navbar-link.active');
+            if (activeLink) {
+                activeLink.classList.remove('active');
+            }
+            this.classList.add('active');
 
-        const pageName = this.textContent.toLowerCase(); // اسم الصفحة المستهدفة
-        const articles = document.querySelectorAll('article');
-        articles.forEach(article => {
-          article.classList.remove('active'); // إزالة فئة النشاط من جميع الصفحات
-          if (article.getAttribute('data-page') === pageName) {
-            article.classList.add('active'); // إضافة فئة النشاط للصفحة المستهدفة فقط
-          }
+            const pageName = this.textContent.toLowerCase().replace(/\s/g, ''); // اسم الصفحة المستهدفة بدون فراغات
+            const pageURL = `/senddrawinghom/${pageName}.html`; // تكوين رابط الصفحة المستهدفة
+            window.location.href = pageURL; // تحويل الصفحة إلى الرابط المستهدف
         });
-      });
     });
-  });
+}); 
+  
 
 
         async function fetchGalleryData() {
